@@ -1,14 +1,20 @@
 import { seedApplications } from "../data/seedApplication";
 
+const LOCAL_STORAGE_KEY = "job_applications"
 export function getApplications() {
-    const job_applications = JSON.parse(localStorage.getItem("job_applications"))
+    try {
+        const storedApplications = localStorage.getItem(LOCAL_STORAGE_KEY)
 
-    if (!job_applications) {
-        const job_applications = localStorage.setItem("job_applications", JSON.stringify(seedApplications))        
-        return job_applications
+        if (!storedApplications) {
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(seedApplications))
+            return seedApplications
+        }
+
+        return JSON.parse(storedApplications)
+    } catch (error) {
+        console.error("Failed to load applications form localStorage\n", error) //Handle in prod?
+        return []
     }
-
-    return job_applications
 }
 
 export function saveApplications(apps) {
