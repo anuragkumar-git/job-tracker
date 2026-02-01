@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { getApplications } from "./services/storage";
+import ApplicationCard from "./features/applications/ApplicationCard";
 
 function App() {
   const [jobs, setJobs] = useState(() => getApplications());
 
   return (
     <>
-      {jobs.map((job) => (
-        <div key={job?.id}>
-          <p>
-            {job?.companyName} - {job?.location} - {job?.jobRole}
-          </p>
-        </div>
-      ))}
+      <div className="max-w-6xl mx-auto p-6 space-y-4">
+        {jobs.map((job) => (
+          <ApplicationCard key={job?.id} application={job} />
+        ))}
+      </div>
     </>
   );
 }
