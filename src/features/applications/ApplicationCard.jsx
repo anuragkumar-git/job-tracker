@@ -1,7 +1,8 @@
+import { useState } from "react";
 import StatusBadge from "../../components/StatusBadge";
 import { STATUS_OPTIONS } from "../../utils/statusOptions";
 
-function ApplicationCard({ application, onStatusChange }) {
+function ApplicationCard({ application, onStatusChange, onArchive }) {
   const {
     id,
     companyName,
@@ -46,6 +47,12 @@ function ApplicationCard({ application, onStatusChange }) {
             In terview on: {new Date(interviewDate).toLocaleDateString()}
           </p>
         )}
+        <button
+          onClick={() => onArchive(application.id)}
+          className="text-xs text-red-600 hover:underline self-end"
+        >
+          Archive
+        </button>
       </div>
     </>
   );
