@@ -4,6 +4,7 @@ import ApplicationCard from "./features/applications/ApplicationCard";
 import ApplicationForm from "./features/applications/ApplicationForm";
 import FilterBar from "./components/FilterBar";
 import { STATUS_OPTIONS } from "./utils/statusOptions";
+import KanbanBoard from "./features/applications/KanbanBoard";
 
 function App() {
   const [jobs, setJobs] = useState(() => getApplications());
@@ -105,6 +106,7 @@ function App() {
             onArchive={handleArchive}
           />
         ))}
+        <KanbanBoard jobs={filteredJobs} onStatusChange={handleStatusChange} onArchive={handleArchive}/>
       </div>
     </>
   );
