@@ -17,8 +17,8 @@ export function getApplications() {
     }
 }
 
-export function saveApplications(apps) {
-
+export function saveApplications(applications) {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(applications))
 }
 
 export function addApplication(app) {

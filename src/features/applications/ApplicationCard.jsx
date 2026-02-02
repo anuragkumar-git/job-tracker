@@ -1,7 +1,9 @@
 import StatusBadge from "../../components/StatusBadge";
+import { STATUS_OPTIONS } from "../../utils/statusOptions";
 
-function ApplicationCard({ application }) {
+function ApplicationCard({ application, onStatusChange }) {
   const {
+    id,
     companyName,
     jobRole,
     workMode,
@@ -19,7 +21,19 @@ function ApplicationCard({ application }) {
             <h2 className="text-lg font-semibold text-gray-800">{jobRole}</h2>
             <p className="text-sm text-gray-500 ">{companyName}</p>
           </div>
-          <StatusBadge status={status} />
+          <select
+            name="status"
+            value={status}
+            onChange={(e) => onStatusChange(id, e.target.value)}
+            className="text-xs border rounded-md px-2 py-1 bg-white"
+          >
+            {STATUS_OPTIONS.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          {/* <StatusBadge status={status} /> */}
         </div>
         <div className="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
           <span>{workMode}</span>
