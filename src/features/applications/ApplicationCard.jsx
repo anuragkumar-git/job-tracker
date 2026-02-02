@@ -1,4 +1,3 @@
-import { useState } from "react";
 import StatusBadge from "../../components/StatusBadge";
 import { STATUS_OPTIONS } from "../../utils/statusOptions";
 
@@ -22,7 +21,7 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
             <h2 className="text-lg font-semibold text-gray-800">{jobRole}</h2>
             <p className="text-sm text-gray-500 ">{companyName}</p>
           </div>
-          <select
+          {!application.archived && <select
             name="status"
             value={status}
             onChange={(e) => onStatusChange(id, e.target.value)}
@@ -33,8 +32,8 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
                 {s}
               </option>
             ))}
-          </select>
-          {/* <StatusBadge status={status} /> */}
+          </select>}
+          <StatusBadge status={status} />
         </div>
         <div className="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
           <span>{workMode}</span>
@@ -51,7 +50,7 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
           onClick={() => onArchive(application.id)}
           className="text-xs text-red-600 hover:underline self-end"
         >
-          Archive
+          {application.archived ? "Unarchived" : "Archive"}
         </button>
       </div>
     </>
