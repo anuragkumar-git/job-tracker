@@ -39,6 +39,7 @@ function ApplicationForm({ onAdd }) {
         className="border border-gray-200 rounded-xl p-6 bg-white shadow-sm flex flex-col gap-4"
       >
         <h2 className="text-lg font-semibold">Add new Application</h2>
+        {/* Add button to close-> setAddApplication(false) */}
         <input
           type="text"
           name="companyName"

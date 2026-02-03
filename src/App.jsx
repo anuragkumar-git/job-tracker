@@ -5,6 +5,7 @@ import ApplicationForm from "./features/applications/ApplicationForm";
 import FilterBar from "./components/FilterBar";
 import { STATUS_OPTIONS } from "./utils/statusOptions";
 import KanbanBoard from "./features/applications/KanbanBoard";
+import DndIsolationTest from "./pages/DndIsolationTest";
 
 function App() {
   const [jobs, setJobs] = useState(() => getApplications());
@@ -12,8 +13,11 @@ function App() {
   const [addApplication, setAddApplication] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [view, setView] = useState(false);
 
   function handleStatusChange(id, newStatus) {
+    console.log("handleStatusChange:", newStatus);
+
     const updated = jobs.map((job) =>
       job.id === id ? { ...job, status: newStatus } : job,
     );
@@ -22,10 +26,12 @@ function App() {
     saveApplications(updated);
   }
   function handleArchive(id) {
-    const updated = jobs.map((job) =>
-      job.id === id
-        ? { ...job, archived: !job.archived, updatedAt: new Date() }
-        : job,
+    const updated = jobs.map(
+      (job) =>
+        job.id === id
+          ? { ...job, archived: !job.archived, updatedAt: new Date() }
+          : job,
+      console.log("archive", id),
     );
 
     setJobs(updated);
@@ -63,15 +69,15 @@ function App() {
     });
   return (
     <>
-      <FilterBar
-        search={search}
-        setSearch={setSearch}
-        statusFilter={statusFilter}
-        setStatusFilter={setStatusFilter}
-        statusOptions={STATUS_OPTIONS}
-      />
-      {addApplication && <ApplicationForm onAdd={handleApplication} />}
       <div className="max-w-6xl mx-auto p-6 space-y-4">
+        <FilterBar
+          search={search}
+          setSearch={setSearch}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          statusOptions={STATUS_OPTIONS}
+        />
+        {addApplication && <ApplicationForm onAdd={handleApplication} />}
         {!addApplication && (
           <button
             className="bg-gray-900 text-white py-2 rounded-lg px-3"
@@ -83,6 +89,12 @@ function App() {
           </button>
         )}
         <div className="flex gap-4 mb-4">
+          <button
+            className="bg-gray-900 text-white py-2 rounded-lg px-3"
+            onClick={() => setView(!view)}
+          >
+            {view ? "Switch to Board" : "Switch to List"}
+          </button>
           <button
             onClick={() => setShowArchived(false)}
             className={!showArchived ? "font-semibold" : ""}
@@ -98,16 +110,25 @@ function App() {
         </div>
         {/* {jobs
           .filter((job) => job.archived === showArchived) */}
-        {filteredJobs.map((job) => (
-          <ApplicationCard
-            key={job?.id}
-            application={job}
+        {filteredJobs.length === 0 && "No result found"}
+        {view ? (
+          filteredJobs.map((job) => (
+            <ApplicationCard
+              key={job.id}
+              application={job}
+              onStatusChange={handleStatusChange}
+              onArchive={handleArchive}
+            />
+          ))
+        ) : (
+          <KanbanBoard
+            jobs={filteredJobs}
             onStatusChange={handleStatusChange}
             onArchive={handleArchive}
           />
-        ))}
-        <KanbanBoard jobs={filteredJobs} onStatusChange={handleStatusChange} onArchive={handleArchive}/>
+        )}
       </div>
+      <DndIsolationTest />
     </>
   );
 }
