@@ -9,26 +9,26 @@ export default function KanbanBoard({ jobs, onStatusChange, onArchive }) {
 
   function handleDragEnd(e) {
     const { active, over } = e;
-    console.log({ e: e });
-    console.log({ active: active.id });
-    console.log({ over: over?.id });
+    // console.log({ e: e });
+    // console.log({ active: active.id });
+    // console.log({ over: over?.id });
 
     if (!over) return;
     const id = active.id;
     const newStatus = over.id;
 
-    console.log({ id: id });
-    console.log({ newStatus: newStatus });
+    // console.log({ id: id });
+    // console.log({ newStatus: newStatus });
 
     onStatusChange(id, newStatus);
   }
   return (
     <>
       <DndContext
-        onDragStart={(e) =>
-          console.log("Dragging:", e.active.data.current.application)
-        }
-        onDragOver={(e) => console.log("Over:", e.over?.id)}
+        // onDragStart={(e) =>
+        //   console.log("Dragging:", e.active.data.current.application)
+        // }
+        // onDragOver={(e) => console.log("Over:", e.over?.id)}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >

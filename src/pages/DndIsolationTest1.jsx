@@ -1,5 +1,9 @@
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
+import {
+  DndContext,
+  useDraggable,
+  useDroppable,
+} from "@dnd-kit/core";
 
 function DraggableBox() {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -27,7 +31,7 @@ function DraggableBox() {
   );
 }
 
-function DroppableBox({ id, color }) {
+function DroppableBox({ id, children }) {
   const { setNodeRef, isOver } = useDroppable({ id });
 
   return (
@@ -36,38 +40,44 @@ function DroppableBox({ id, color }) {
       style={{
         width: 250,
         height: 250,
-        background: isOver ? "lightgreen" : color,
+        background: isOver ? "lightgreen" : "#eee",
         border: "4px solid black",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         fontWeight: "bold",
+        flexDirection: "column",
+        gap: 10,
       }}
     >
       {id}
+      {children}
     </div>
   );
 }
 
-export default function DndIsolationTest() {
-  return (
-    <>
-      {/* handle stage + -> first to second, - -> second -> first */}
-      <button on>Stage</button>
-      <DndContext
-        onDragEnd={(e) => {
-          console.log("OVER:", e.over?.id);
-        }}
-      >
-        <div style={{ display: "flex", gap: 40, margin: 50 }}>
-          <DroppableBox id="LEFT" color="pink" />
-          <DroppableBox id="RIGHT" color="skyblue" />
-        </div>
+export default function DndIsolationTest1() {
+  const [status, setStatus] = useState("LEFT");
 
-        <div style={{ marginTop: 40 }}>
-          <DraggableBox />
-        </div>
-      </DndContext>
-    </>
+  function handleDragEnd(event) {
+    const { over } = event;
+    if (!over) return;
+
+    console.log("Dropped into:", over.id);
+    setStatus(over.id);
+  }
+
+  return (
+    <DndContext onDragEnd={handleDragEnd}>
+      <div style={{ display: "flex", gap: 40, margin: 50 }}>
+        <DroppableBox id="LEFT">
+          {status === "LEFT" && <DraggableBox />}
+        </DroppableBox>
+
+        <DroppableBox id="RIGHT">
+          {status === "RIGHT" && <DraggableBox />}
+        </DroppableBox>
+      </div>
+    </DndContext>
   );
 }

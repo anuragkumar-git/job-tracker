@@ -29,21 +29,22 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
       : undefined,
   };
   return (
-    <div
-      {...listeners}
-      {...attributes}
-      className="cursor-grab text-xs text-gray-400 self-end"
-    >
+    <div ref={setNodeRef}>
       <div
-        style={{ ...style, touchAction: "none" }}
-        className="border border-gray-200 rounded-xl p-4 shadow-sm bg-white flex flex-col gap-3"
+        {...listeners}
+        {...attributes}
+        className="cursor-grab text-xs text-gray-400 self-end"
       >
-        <div className="flex items-start justify-between">
-          <div>
-            <h2 className="text-lg font-semibold text-gray-800">{jobRole}</h2>
-            <p className="text-sm text-gray-500 ">{companyName}</p>
-          </div>
-          {/* {!application.archived && (
+        <div
+          style={{ ...style, touchAction: "none" }}
+          className="border border-gray-200 rounded-xl p-4 shadow-sm bg-white flex flex-col gap-y-3"
+        >
+          <div className="flex items-start justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-800">{jobRole}</h2>
+              <p className="text-sm text-gray-500 ">{companyName}</p>
+            </div>
+            {/* {!application.archived && (
             <select
               name="status"
               value={status}
@@ -57,25 +58,26 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
               ))}
             </select>
           )} */}
-          <StatusBadge status={status} />
-        </div>
-        <div className="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
-          <span>{workMode}</span>
-          <span>{jobType}</span>
-          <span>{location}</span>
-          {ctc && <span>CTC: {ctc}</span>}
-        </div>
-        {interviewDate && (
-          <p className="text-sm text-yellow-700">
-            In terview on: {new Date(interviewDate).toLocaleDateString()}
-          </p>
-        )}
-        <button
-          onClick={() => onArchive(application.id)}
+            <StatusBadge status={status} />
+          </div>
+          <div className="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
+            <span>{workMode}</span>
+            <span>{jobType}</span>
+            <span>{location}</span>
+            {ctc && <span>CTC: {ctc}</span>}
+          </div>
+          {interviewDate && (
+            <p className="text-sm text-yellow-700">
+              In terview on: {new Date(interviewDate).toLocaleDateString()}
+            </p>
+          )}
+          <button
+          onClick={() => onArchive(id)}
           className="text-xs text-red-600 hover:underline self-end"
         >
           {application.archived ? "Unarchived" : "Archive"}
         </button>
+        </div>
       </div>
     </div>
   );

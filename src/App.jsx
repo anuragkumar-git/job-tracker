@@ -6,6 +6,9 @@ import FilterBar from "./components/FilterBar";
 import { STATUS_OPTIONS } from "./utils/statusOptions";
 import KanbanBoard from "./features/applications/KanbanBoard";
 import DndIsolationTest from "./pages/DndIsolationTest";
+import DndIsolationTest1 from "./pages/DndIsolationTest1";
+import DndIsolationTest2 from "./pages/DndIsolationTest2";
+import DndIsolationTest3 from "./pages/DndIsolationTest3";
 
 function App() {
   const [jobs, setJobs] = useState(() => getApplications());
@@ -16,7 +19,7 @@ function App() {
   const [view, setView] = useState(false);
 
   function handleStatusChange(id, newStatus) {
-    console.log("handleStatusChange:", newStatus);
+    // console.log("handleStatusChange:", newStatus);
 
     const updated = jobs.map((job) =>
       job.id === id ? { ...job, status: newStatus } : job,
@@ -128,7 +131,10 @@ function App() {
           />
         )}
       </div>
-      <DndIsolationTest />
+      {/* <DndIsolationTest />
+      <DndIsolationTest1 />
+      <DndIsolationTest2 />
+      <DndIsolationTest3 /> */}
     </>
   );
 }
