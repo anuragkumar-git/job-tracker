@@ -1,16 +1,136 @@
-# React + Vite
+# 🚀 Job Application Tracker (Personal ATS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal Applicant Tracking System (ATS) built using React, Vite, Tailwind CSS (latest setup) and dnd-kit.
 
-Currently, two official plugins are available:
+This project helps track job applications using a Kanban-style workflow with persistent local storage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+### ✨ Features
 
-## React Compiler
+- ✅ Add new job applications
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ✅ Status pipeline management
 
-## Expanding the ESLint configuration
+- ✅ Drag-and-drop Kanban board (dnd-kit)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ Archive / Unarchive applications
+
+- ✅ Search and filter by status
+
+- ✅ Persistent storage using localStorage
+
+- ✅ Clean component architecture
+
+- ✅ Modular and scalable folder structure
+
+---
+### 🧠 Application Workflow
+
+Each job application moves through a status pipeline:
+
+`Applied` -> `Shortlisted` -> `Interview Scheduled` -> `Interviewed` -> `Offer Received` -> `Selected` -> `Rejected` -> `No Response`
+
+The Kanban board automatically groups applications by status.
+
+Dragging a card updates its status and persists the change.
+
+----
+
+### 🏗️ Tech Stack
+
+- ⚛️ React (Vite)
+
+- 🎨 Tailwind CSS (latest Vite plugin setup)
+
+- 🧩 dnd-kit (drag and drop)
+
+- 💾 localStorage (data persistence)
+
+---
+
+### 📂 Project Structure
+```      
+└───src
+    ├───components    → Reusable UI components
+    │
+    ├───data
+    │       seedApplication.js
+    │
+    ├───features
+    │   └───applications
+    │           ApplicationCard.jsx
+    │           ApplicationForm.jsx
+    │           KanbanBoard.jsx
+    │           KanbanColumn.jsx
+    │
+    ├───services    → Storage abstraction layer
+    │
+    └───utils       → Status options
+```
+### Architectural Decisions
+
+- State lives in `App.jsx`
+
+- UI components remain presentation-focused
+
+- Storage abstraction allows easy backend upgrade later
+
+- Kanban layout derived from job status (state-driven UI)
+
+---
+
+### 🧩 Key Engineering Concepts Implemented
+
+- State-driven UI rendering
+
+- Controlled forms with validation
+
+- Soft delete via archive flag
+
+- Derived state filtering
+
+- Separation of concerns (UI vs logic vs storage)
+
+- Drag-and-drop interaction using collision detection
+
+---
+
+### 🖥️ Installation
+```cmd
+git clone https://github.com/anuragkumar-git/job-tracker.git
+cd job-tracker
+npm install
+npm run dev
+```
+
+---
+
+### 📦 Future Improvements
+
+- Backend integration (MongoDB + API)
+
+- Authentication
+
+- Dashboard analytics
+
+- Interview reminders
+
+- Resume upload per application
+
+- Export to CSV
+
+- Dark mode toggle
+
+---
+
+### 🎯 Purpose of the Project
+
+This project was built to:
+
+- Improve frontend architecture skills
+
+- Practice drag-and-drop workflows
+
+- Implement state-driven UI patterns
+
+- Build a real-world productivity tool
