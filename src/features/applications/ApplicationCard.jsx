@@ -14,6 +14,7 @@ function ApplicationCard({ application, onArchive }) {
     status,
     interviewDate,
     dateApplied,
+    notes,
   } = application;
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -76,6 +77,7 @@ function ApplicationCard({ application, onArchive }) {
             Interview on: {new Date(interviewDate).toLocaleDateString()}
           </p>
         )}
+         {notes && <span className="text-sm text-gray-500" >{notes} </span>}
       </div>
         <button
           onClick={() => onArchive(id)}

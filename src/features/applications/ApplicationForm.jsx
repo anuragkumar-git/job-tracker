@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function ApplicationForm({ onAdd }) {
+function ApplicationForm({ onAdd, onClose }) {
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     companyName: "",
     jobRole: "",
@@ -18,8 +19,11 @@ function ApplicationForm({ onAdd }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAdd(form);
-    console.log(form);
+    if (!form.companyName.trim() || !form.jobRole.trim()) {
+      setError("Company and Job Role are required*");
+      // alert("Company and Job Role are required.");
+      return;
+    }
     setForm({
       companyName: "",
       jobRole: "",
@@ -31,6 +35,7 @@ function ApplicationForm({ onAdd }) {
       interviewDate: "",
       notes: "",
     });
+    onAdd(form);
   }
   return (
     <>
@@ -38,8 +43,17 @@ function ApplicationForm({ onAdd }) {
         onSubmit={handleSubmit}
         className="border border-gray-200 rounded-xl p-6 bg-white shadow-sm flex flex-col gap-4"
       >
-        <h2 className="text-lg font-semibold">Add new Application</h2>
-        {/* Add button to close-> setAddApplication(false) */}
+        <div className="flex flex-row">
+          <h2 className="text-lg font-semibold">Add new Application</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-800 "
+          >
+            ✕
+          </button>
+        </div>
+        {error && <p className="text-sm text-red-600">{error}</p>}
         <input
           type="text"
           name="companyName"

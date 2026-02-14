@@ -13,7 +13,7 @@ import DndIsolationTest3 from "./pages/DndIsolationTest3";
 function App() {
   const [jobs, setJobs] = useState(() => getApplications());
   const [showArchived, setShowArchived] = useState(false);
-  const [addApplication, setAddApplication] = useState(false);
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [view, setView] = useState(false);
@@ -55,7 +55,7 @@ function App() {
     const updated = [newApplication, ...jobs];
     setJobs(updated);
     saveApplications(updated);
-    setAddApplication(false);
+    setShowApplicationForm(false);
   }
 
   const filteredJobs = jobs
@@ -80,13 +80,11 @@ function App() {
           setStatusFilter={setStatusFilter}
           statusOptions={STATUS_OPTIONS}
         />
-        {addApplication && <ApplicationForm onAdd={handleApplication} />}
-        {!addApplication && (
+        {showApplicationForm && <ApplicationForm onAdd={handleApplication} onClose={()=>setShowApplicationForm(false)} />}
+        {!showApplicationForm && (
           <button
             className="bg-gray-900 text-white py-2 rounded-lg px-3"
-            onClick={() => {
-              setAddApplication(!addApplication);
-            }}
+            onClick={() => setShowApplicationForm(!showApplicationForm)}
           >
             Add Application
           </button>
