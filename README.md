@@ -4,6 +4,7 @@ A personal Applicant Tracking System (ATS) built using React, Vite, Tailwind CSS
 
 This project helps track job applications using a Kanban-style workflow with persistent local storage.
 
+[Live on](https://anuragkumar-git.github.io/job-tracker/) `gh-pages`
 ---
 ### ✨ Features
 
