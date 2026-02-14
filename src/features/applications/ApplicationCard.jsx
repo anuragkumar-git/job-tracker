@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import StatusBadge from "../../components/StatusBadge";
 import { STATUS_OPTIONS } from "../../utils/statusOptions";
 
-function ApplicationCard({ application, onStatusChange, onArchive }) {
+function ApplicationCard({ application, onArchive }) {
   const {
     id,
     companyName,
@@ -13,6 +13,7 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
     ctc,
     status,
     interviewDate,
+    dateApplied,
   } = application;
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -29,22 +30,26 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
       : undefined,
   };
   return (
-    <div ref={setNodeRef}>
+    <div
+      // className="cursor-grab text-xs text-gray-400 self-end"
+      ref={setNodeRef}
+      className="text-xs text-gray-400 self-end border border-gray-200 rounded-xl p-4 shadow-sm bg-white flex flex-col gap-y-3"
+      style={{ ...style }}
+    >
       <div
         {...listeners}
         {...attributes}
-        className="cursor-grab text-xs text-gray-400 self-end"
+        className="cursor-grab"
+        // style={{ ...style }}
       >
-        <div
-          style={{ ...style, touchAction: "none" }}
-          className="border border-gray-200 rounded-xl p-4 shadow-sm bg-white flex flex-col gap-y-3"
-        >
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="text-lg font-semibold text-gray-800">{jobRole}</h2>
-              <p className="text-sm text-gray-500 ">{companyName}</p>
-            </div>
-            {/* {!application.archived && (
+        <div className="flex  items-start justify-between">
+          <div>
+            <h2 className="text-lg  flex-wrap font-semibold text-gray-800">{jobRole}</h2>
+            <p className="text-sm text-gray-500 ">{companyName}</p>
+            {dateApplied && <span className="text-sm text-gray-500" >{dateApplied} </span>}
+            {/* <p  ">{application?.createdAt}</p> */}
+          </div>
+          {/* {!application.archived && (
             <select
               name="status"
               value={status}
@@ -58,27 +63,26 @@ function ApplicationCard({ application, onStatusChange, onArchive }) {
               ))}
             </select>
           )} */}
-            <StatusBadge status={status} />
-          </div>
-          <div className="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
-            <span>{workMode}</span>
-            <span>{jobType}</span>
-            <span>{location}</span>
-            {ctc && <span>CTC: {ctc}</span>}
-          </div>
-          {interviewDate && (
-            <p className="text-sm text-yellow-700">
-              In terview on: {new Date(interviewDate).toLocaleDateString()}
-            </p>
-          )}
-          <button
+          <StatusBadge status={status} />
+        </div>
+        <div className="text-sm text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
+          <span>{workMode}</span>
+          <span>{jobType}</span>
+          <span>{location}</span>
+          {ctc && <span>CTC: {ctc}</span>}
+        </div>
+        {interviewDate && (
+          <p className="text-sm text-yellow-700">
+            Interview on: {new Date(interviewDate).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+        <button
           onClick={() => onArchive(id)}
-          className="text-xs text-red-600 hover:underline self-end"
+          className="text-xs text-red-600 hover:underline self-end p-1"
         >
           {application.archived ? "Unarchived" : "Archive"}
         </button>
-        </div>
-      </div>
     </div>
   );
 }

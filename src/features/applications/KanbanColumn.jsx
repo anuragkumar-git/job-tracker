@@ -4,7 +4,7 @@ import ApplicationCard from "./ApplicationCard";
 export default function KanbanColumn({
   status,
   jobs,
-  onStatusChange,
+  // onStatusChange,
   onArchive,
 }) {
   const { setNodeRef, isOver } = useDroppable({
@@ -14,8 +14,8 @@ export default function KanbanColumn({
   return (
     <div
       ref={setNodeRef}
-      // className ="min-w-75 min-h-50 bg-red-100  rounded-xl p-4 flex-flex-col gap-y-4"
-      className={`min-w-75 min-h-75 p-4 rounded-xl border-2 ${isOver ? "bg-green-200" : "bg-yellow-50"} `}
+      className ="min-w-75 min-h-50 bg-red-100  rounded-xl p-4 flex-flex-col gap-x-4"
+      // className={`min-w-75 min-h-75 p-4 rounded-xl border-2 ${isOver ? "bg-green-200" : "bg-yellow-50"} `}
     >
       <h3 className="font-semibold text-gray-700">{status}</h3>
 
@@ -23,7 +23,7 @@ export default function KanbanColumn({
         <ApplicationCard
           key={job.id}
           application={job}
-          onStatusChange={onStatusChange}
+          // onStatusChange={onStatusChange}
           onArchive={onArchive}
         />
       ))}

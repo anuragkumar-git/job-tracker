@@ -119,7 +119,7 @@ function App() {
             <ApplicationCard
               key={job.id}
               application={job}
-              onStatusChange={handleStatusChange}
+              // onStatusChange={handleStatusChange}
               onArchive={handleArchive}
             />
           ))

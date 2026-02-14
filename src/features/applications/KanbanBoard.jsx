@@ -40,7 +40,7 @@ export default function KanbanBoard({ jobs, onStatusChange, onArchive }) {
                 key={status}
                 status={status}
                 jobs={columnJobs}
-                onStatusChange={onStatusChange}
+                // onStatusChange={onStatusChange}
                 onArchive={onArchive}
               />
             );
