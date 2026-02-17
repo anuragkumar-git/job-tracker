@@ -1,9 +1,9 @@
 export const seedApplications = [
     {
         id: 1,
-        companyName: "Royal",
+        companyName: "Microsoft",
         jobRole: "Intern",
-        jobLink: "royal.com/careers",
+        jobLink: "microsoft.com/careers",
         workMode: "OnSite",
         jobtype: "Full-Time",
         location: "Nvarangpura",
@@ -31,24 +31,6 @@ export const seedApplications = [
         interviewDate: "",
         notes: "",
         tags: "Referral",
-        archived: false,
-        createdAt: "",
-        updatedAt: ""
-    },
-    {
-        id: 3,
-        companyName: "NationWide",
-        jobRole: "Dev",
-        jobLink: "NationWide.com/careers",
-        workMode: "OnSite",
-        jobtype: "Part-Time",
-        location: "Bopal",
-        ctc: 2,
-        status: "Applied",
-        dateApplied: "1-2-26",
-        interviewDate: "",
-        notes: "",
-        tags: "LinkedIn",
         archived: false,
         createdAt: "",
         updatedAt: ""
